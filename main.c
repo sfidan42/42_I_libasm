@@ -1,16 +1,27 @@
 #include "libasm.h"
 
+void	print(const char *str)
+{
+	ft_write(1, str, ft_strlen(str));
+}
+
+void	scan(char *buffer, size_t size)
+{
+	ssize_t	bytes;
+
+	bytes = ft_read(0, buffer, size);
+	buffer[bytes] = '\0';
+}
+
 int	main(void)
 {
 	char	buffer[1024] = {0};
-	ssize_t	bytes;
 
-	ft_write(1, "Hello, World!\n", 14);
-	ft_write(1, "What's your name?\n---> ", 24);
-	bytes = ft_read(0, buffer, 100);
-	buffer[bytes] = '\0';
-	ft_write(1, "Nice to meet you ", 18);
-	ft_write(1, buffer, ft_strlen(buffer));
-	ft_write(1, "Goodbye!\n", 9);
+	print("Hello!\n");
+	print("What's your name?\n---> ");
+	scan(buffer, 1024);
+	print("Nice to meet you ");
+	print(buffer);
+	print("Goodbye!\n");
 	return (0);
 }

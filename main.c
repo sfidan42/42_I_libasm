@@ -28,7 +28,6 @@ void	test1(void)
 	print("Goodbye!\n");
 }
 
-/*
 void	test2(void)
 {
 	char	*str;
@@ -37,7 +36,6 @@ void	test2(void)
 	print(str);
 	free(str);
 }
-*/
 
 void	print_cmp(const char *s1, const char *s2)
 {
@@ -67,7 +65,7 @@ void	test3(void)
 int	main(void)
 {
 	//test1();
-	//test2();
-	test3();
+	test2();
+	//test3();
 	return (0);
 }

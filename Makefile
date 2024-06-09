@@ -25,9 +25,8 @@ all: ${OBJ}
 bonus: ${BOBJ}
 	ar rcs ${NAME} ${BOBJ}
 
-run: all
+compile: all
 	gcc -Wall -Wextra -Werror main.c -m64 -g -L. -lasm -o run
-	./run
 
 brun: bonus
 	gcc -Wall -Wextra -Werror main_bonus.c ${NAME} -o brun

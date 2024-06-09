@@ -132,4 +132,16 @@ I run the following commands to debug the assembly code:
     (gdb) run
 \end{verbatim}
 
+\section{Tricks}
+
+\subsection{argument passing in x64 Intel}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{trick.png}
+    \caption{Argument passing for ft\_strcpy}
+    \label{fig:trick}
+\end{figure}
+
+I noticed that when compiled with gcc (gcc main.c + libasm.a, libasm.a was compiled using nasm already) the first argument is passed in both rdx and rsi registers, and the second argument is passed in both rdi and rsi registers. I used the advantage this trick in my implementation by moving a register value and then substraction with fixed valued register and ta da.
+
 \end{document}

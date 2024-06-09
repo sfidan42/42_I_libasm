@@ -33,7 +33,7 @@ void	test2(void)
 {
 	char	*str;
 
-	str = ft_strdup("a\n");
+	str = ft_strdup("Here is the string copied by ft_strdup\n");
 	print("copied\n");
 	print(str);
 	print("printed\n");

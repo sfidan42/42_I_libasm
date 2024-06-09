@@ -2,6 +2,8 @@
 
 int	main(void)
 {
+	char *str;
+	
 	/*
 	char	buffer[100] = {0};
 	ssize_t	bytes;
@@ -14,6 +16,7 @@ int	main(void)
 	ft_write(1, buffer, ft_strlen(buffer));
 	ft_write(1, "Goodbye!\n", 9);
 	*/
-	ft_strlen("Hello, World!\n");
+	str = "Hello, World!\n";
+	ft_write(1, str, ft_strlen(str));
 	return (0);
 }

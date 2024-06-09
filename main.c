@@ -27,6 +27,7 @@ void	test1(void)
 	print(buffer2);
 	print("Goodbye!\n");
 }
+
 /*
 void	test2(void)
 {
@@ -38,9 +39,35 @@ void	test2(void)
 }
 */
 
+void	print_cmp(const char *s1, const char *s2)
+{
+	int	i;
+
+	i = ft_strcmp(s1, s2);
+	print(s1);
+	print(" vs ");
+	print(s2);
+	print(" = ");
+	if (i < 0)
+		print("smaller");
+	else if (i == 0)
+		print("equal");
+	else
+		print("bigger");
+	print("\n");
+}
+
+void	test3(void)
+{
+	print_cmp("hello", "hello");
+	print_cmp("hello", "world");
+	print_cmp("world", "hello");
+}
+
 int	main(void)
 {
-	test1();
+	//test1();
 	//test2();
+	test3();
 	return (0);
 }

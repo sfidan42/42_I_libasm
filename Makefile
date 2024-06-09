@@ -12,9 +12,9 @@ BSRC	=	ft_atoi_base_bonus.s \
 			ft_list_remove_if_bonus.s
 BOBJ	=	${OBJ} ${BSRC:.s=.o}
 NAME	=	libasm.a
-ASM		=	nasm -f elf64
-CC		=	gcc -Wall -Wextra -Werror -m64 -g -fPIE
-LIB		=	-L. -lasm 
+ASM		=	nasm -f elf64 # -f macho64
+CC		=	gcc -Wall -Wextra -Werror -m64 -g
+LIB		=	-L. -lasm
 
 ${NAME}: all
 

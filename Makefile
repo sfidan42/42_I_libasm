@@ -34,6 +34,7 @@ brun: bonus
 	./brun
 
 clean:
+	rm -f ./run ./brun
 	rm -f ${OBJ} ${BOBJ}
 
 fclean: clean

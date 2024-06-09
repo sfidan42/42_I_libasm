@@ -1,10 +1,8 @@
-// main.c
-#include <stdio.h>
+// Declare the foo function (implemented in hello.s)
+extern void foo();
 
-// Declare the hello function (implemented in hello.s)
-extern void hello();
-
-int main() {
-    hello();
-    return 0;
+int main(void)
+{
+    foo();
+    return (0);
 }

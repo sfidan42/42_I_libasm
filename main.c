@@ -1,4 +1,5 @@
 #include "libasm.h"
+
 extern void free(void *ptr);
 
 void	print(const char *str)
@@ -33,7 +34,9 @@ void	test2(void)
 	char	*str;
 
 	str = ft_strdup("Hello, world!\n");
+	print("copied\n");
 	print(str);
+	print("printed\n");
 	free(str);
 }
 

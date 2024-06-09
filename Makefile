@@ -14,26 +14,21 @@ BOBJ	=	${OBJ} ${BSRC:.s=.o}
 NAME	=	libasm.a
 ASM		=	nasm -f elf64 # -f macho64
 CC		=	gcc -Wall -Wextra -Werror -m64 -g
-LD		=	ld -lc -dynamic-linker
 
 ${NAME}: all
 
 %.o: %.s
 	${ASM} $< -o $@
 
-compile: all
-	${CC} -c main.c -o main.o
-	${LD} main.o /lib64/ld-linux-x86-64.so.2 ${OBJ} -o run
-
-bcompile: bonus
-	${CC} -c main_bonus.c
-	${LIB} -o brun
-
 all: ${OBJ}
 	ar rcs ${NAME} ${OBJ}
+	${CC} -c main.c -o main.o
+	${CC} main.o -L. -lasm -o run -z noexecstack -static
 
 bonus: ${BOBJ}
 	ar rcs ${NAME} ${BOBJ}
+	${CC} -c main_bonus.c -o main_bonus.o
+	${CC} main_bonus.o -L. -lasm -o run -z noexecstack -static
 
 clean:
 	rm -f main.o

@@ -1,12 +1,18 @@
-extern puts
+section .data
+    hello db 'Hello, World!',0
 
 section .text
-global hello
+    global foo
+    extern puts
 
-hello:
-    mov rdi, message
+foo:
+    push rbp
+    mov rbp, rsp
+
+    ; puts(hello)
+    lea rdi, [rel hello]
     call puts
-    ret
 
-section .data
-    message db "Hello", 0, 0
+    mov rsp, rbp
+    pop rbp
+    ret

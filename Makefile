@@ -16,15 +16,29 @@ COMP	=	nasm
 
 ${NAME}: all
 
-all:
-	nasm -f macho64 ft_strlen.s -o ft_strlen.o
+%.o: %.s
+	${COMP} -f elf64 $< -o $@
 
-bonus:
+all: ${OBJ}
+	ar rcs ${NAME} ${OBJ}
+
+bonus: ${BOBJ}
+	ar rcs ${NAME} ${BOBJ}
+
+run: all
+	gcc -Wall -Wextra -Werror main.c -m64 -g -L. -lasm -o run
+	./run
+
+brun: bonus
+	gcc -Wall -Wextra -Werror main_bonus.c ${NAME} -o brun
+	./brun
 
 clean:
+	rm -f ${OBJ} ${BOBJ}
 
 fclean: clean
+	rm -f ${NAME}
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all run brun clean fclean re

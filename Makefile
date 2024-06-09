@@ -3,7 +3,7 @@ SRC		=	ft_strlen.s \
 			ft_strcmp.s \
 			ft_write.s \
 			ft_read.s \
-			ft_strdup.s
+			#ft_strdup.s
 OBJ		=	${SRC:.s=.o}
 BSRC	=	ft_atoi_base_bonus.s \
 			ft_list_push_front_bonus.s \
@@ -12,25 +12,26 @@ BSRC	=	ft_atoi_base_bonus.s \
 			ft_list_remove_if_bonus.s
 BOBJ	=	${OBJ} ${BSRC:.s=.o}
 NAME	=	libasm.a
-COMP	=	nasm
+ASM		=	nasm -f elf64
+CC		=	gcc -Wall -Wextra -Werror -m64 -g -fPIE
+LIB		=	-L. -lasm 
 
 ${NAME}: all
 
 %.o: %.s
-	${COMP} -f elf64 $< -o $@
+	${ASM} $< -o $@
+
+compile: all
+	${CC} main.c ${LIB} -o run
+
+bcompile: bonus
+	${CC} main_bonus.c ${LIB} -o brun
 
 all: ${OBJ}
 	ar rcs ${NAME} ${OBJ}
 
 bonus: ${BOBJ}
 	ar rcs ${NAME} ${BOBJ}
-
-compile: all
-	gcc -Wall -Wextra -Werror main.c -m64 -g -L. -lasm -o run
-
-brun: bonus
-	gcc -Wall -Wextra -Werror main_bonus.c ${NAME} -o brun
-	./brun
 
 clean:
 	rm -f ./run ./brun
@@ -41,4 +42,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all run brun clean fclean re
+.PHONY: all run compile bcompile clean fclean re

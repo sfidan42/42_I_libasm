@@ -1,5 +1,5 @@
 #include "libasm.h"
-
+extern void free(void *ptr);
 
 void	print(const char *str)
 {
@@ -27,14 +27,20 @@ void	test1(void)
 	print(buffer2);
 	print("Goodbye!\n");
 }
-
+/*
 void	test2(void)
 {
+	char	*str;
+
+	str = ft_strdup("Hello, world!\n");
+	print(str);
+	free(str);
 }
+*/
 
 int	main(void)
 {
 	test1();
-	test2();
+	//test2();
 	return (0);
 }

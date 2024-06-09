@@ -28,10 +28,10 @@ all: ${OBJ}
 bonus: ${BOBJ}
 	ar rcs ${NAME} ${BOBJ}
 	${CC} -c main_bonus.c -o main_bonus.o
-	${CC} main_bonus.o -L. -lasm -o run -z noexecstack -static
+	${CC} main_bonus.o -L. -lasm -o brun -z noexecstack -static
 
 clean:
-	rm -f main.o
+	rm -f main.o main_bonus.o
 	rm -f ./run ./brun
 	rm -f ${OBJ} ${BOBJ}
 

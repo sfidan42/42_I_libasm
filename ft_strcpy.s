@@ -11,5 +11,6 @@ loop:
     inc rsi
     jmp loop
 end:
-    mov byte [ rdi ], 0
+    mov al, 0
+    mov byte [ rdi ], al
     ret

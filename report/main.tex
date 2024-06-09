@@ -144,4 +144,12 @@ I run the following commands to debug the assembly code:
 
 I noticed that when compiled with gcc (gcc main.c + libasm.a, libasm.a was compiled using nasm already) the first argument is passed in both rdx and rsi registers, and the second argument is passed in both rdi and rsi registers. I used the advantage this trick in my implementation by moving a register value and then substraction with fixed valued register and ta da.
 
+\subsection{debuggin malloc}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{regs_after_malloc.png}
+    \caption{Registers affected by malloc}
+    \label{fig:reg_malloc}
+\end{figure}
+
 \end{document}

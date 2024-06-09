@@ -67,8 +67,18 @@ void	test3(void)
 
 int	main(void)
 {
-	//test1();
+	print("Welcome to libasm test!\n");
+	print("------------------------------------------\n");
+	print("I will ask your name and say hello to you.\n");
+	print("------------------------------------------\n");
+	test1();
+	print("------------------------------------------\n");
+	print("I will copy a string using ft_strdup and print it.\n");
+	print("------------------------------------------\n");
 	test2();
-	//test3();
+	print("------------------------------------------\n");
+	print("I will compare some strings using ft_strcmp.\n");
+	print("------------------------------------------\n");
+	test3();
 	return (0);
 }

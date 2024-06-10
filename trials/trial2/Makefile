@@ -4,8 +4,7 @@ all: main
 
 main: hello.o
 	ar rcs libhello.a hello.o
-	${CC} -c main.c -o main.o
-	${CC} main.o -L. -lhello -o run -z noexecstack -static
+	${CC} main.c -L. -lhello -o run -z noexecstack -static
 
 hello.o: hello.s
 	nasm -f elf64 -o hello.o hello.s

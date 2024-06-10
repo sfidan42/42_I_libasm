@@ -28,11 +28,11 @@ bin:
 
 all: ${OBJ}
 	ar rcs ${NAME} ${OBJ}
-	${CC} main.c -L. -lasm -o run -z noexecstack -static
+	${CC} main.c -L. -lasm -o run -static
 
 bonus: ${BOBJ}
 	ar rcs ${NAME} ${BOBJ}
-	${CC} main_bonus.c -L. -lasm -o brun -z noexecstack -static
+	${CC} main_bonus.c -L. -lasm -o brun -static
 
 clean:
 	rm -f ./run ./brun

@@ -13,7 +13,5 @@ ft_strdup:
 	call malloc		;	rax = malloc(rdi);
 	pop rsi			;	rsi = s1
 	mov rdi, rax	;	rdi = rax
-	push rax		;	save rax
 	call ft_strcpy	;	ft_strcpy(rax, s1); or ft_strcpy(rdi, rsi);
-	pop rax			;	restore rax
 	ret

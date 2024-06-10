@@ -6,14 +6,14 @@ extern malloc
 extern printf
 
 ft_strdup:
-    call ft_strlen
-    push rdi
-    mov rdi, rax
-    inc rdi
-    call malloc
-    pop rsi
-    mov rdi, rax
-    push rax
-    call ft_strcpy
-    pop rax
-    ret
+	call ft_strlen	;	rax = ft_strlen(s1)
+	push rdi		;	save s1
+	mov rdi, rax	;	rdi = rax
+	inc rdi			;	rdi++
+	call malloc		;	rax = malloc(rdi);
+	pop rsi			;	rsi = s1
+	mov rdi, rax	;	rdi = rax
+	push rax		;	save rax
+	call ft_strcpy	;	ft_strcpy(rax, s1); or ft_strcpy(rdi, rsi);
+	pop rax			;	restore rax
+	ret

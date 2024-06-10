@@ -1,19 +1,19 @@
 section .text
 global ft_strcmp
 
-ft_strcmp:
-loop:
-    cmp byte [ rdi ], 0
-    je end
-    cmp byte [ rsi ], 0
-    je end
-    mov al, [ rdi ]
-    cmp al, byte [ rsi ]
-    jne end
-    inc rdi
-    inc rsi
-    jmp loop
-end:
-    mov rax, [ rdi ]
-    sub rax, [ rsi ]
-    ret
+ft_strcmp:				;	while (true)
+loop:					;	{
+	cmp byte [rdi], 0	;		if (*s1 == 0)
+	je end				;			break ;
+	cmp byte [rsi], 0	;		if (*s2 == 0)
+	je end				;			break ;
+	mov al, [rdi]		;		al = *s1
+	cmp al, byte [rsi]	;		if (al != *s2)
+	jne end				;			break ;
+	inc rdi				;		s1++;
+	inc rsi				;		s2++;
+	jmp loop			;	}
+end:					;
+	mov rax, [rdi]		;	rax = *s1
+	sub rax, [rsi]		;	return (rax - *s2);
+	ret

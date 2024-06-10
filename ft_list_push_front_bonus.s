@@ -3,9 +3,8 @@ global ft_list_push_front
 
 ft_list_push_front:
 	; Input:
-	; rdi - address of pointer to head of list (t_list **alst)
-	; rsi - pointer to new node (t_list *new)
-
+	; rdi - (t_list **alst)
+	; rsi - (t_list *new)
 	cmp rsi, 0			;	if (!new)
 	je end				;		return
 	cmp rdi, 0			;	if (!alst)

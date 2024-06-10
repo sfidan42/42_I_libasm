@@ -3,10 +3,10 @@ global ft_strlen
 
 ft_strlen:
 loop:
-    cmp byte [rax], 0
-    je end
-    inc rax
-    jmp loop
+	cmp byte [rax], 0	;	while (*str)
+	je end				;	{
+	inc rax				;		str++;
+	jmp loop			;	}
 end:
-    sub rax, rdi
-    ret
+	sub rax, rdi		;	return (str - begin);
+	ret

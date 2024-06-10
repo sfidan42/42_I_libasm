@@ -3,13 +3,13 @@ global ft_strcpy
 
 ft_strcpy:
 loop:
-    cmp byte [ rsi ], 0
-    je end
-    mov al, byte [ rsi ]
-    mov byte [ rdi ], al
-    inc rdi
-    inc rsi
-    jmp loop
+	cmp byte [rsi], 0	;   while (*src)
+	je end				;	{
+	mov al, byte [rsi]	;		al = *src
+	mov byte [rdi], al	;		*dst = al
+	inc rdi				;		dst++;
+	inc rsi				;		src++;
+	jmp loop			;	}
 end:
-    mov byte [ rdi ], 0
-    ret
+	mov byte [rdi], 0	;	*dst = 0;
+	ret

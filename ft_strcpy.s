@@ -2,6 +2,9 @@ section .text
 global ft_strcpy
 
 ft_strcpy:
+	; Input:
+	; rdi - (char *dst)
+	; rsi - (char *src)
 	push rax			;	save rax
 loop:
 	cmp byte [rsi], 0	;   while (*src)

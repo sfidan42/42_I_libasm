@@ -6,6 +6,10 @@ extern malloc
 extern printf
 
 ft_strdup:
+	; Input:
+	; rdi - (char *s1)
+	; Output:
+	; rax - (char *s2)
 	call ft_strlen	;	rax = ft_strlen(s1)
 	push rdi		;	save s1
 	mov rdi, rax	;	rdi = rax

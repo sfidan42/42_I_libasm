@@ -49,8 +49,8 @@ int	main(void)
 	t_list	*head;
 
 	head = NULL;
-	ft_list_push_front(&head, ft_list_new("Hello"));
-	ft_list_push_front(&head, ft_list_new("World"));
+	ft_list_push_front(&head, ft_list_new("aaaa"));
+	ft_list_push_front(&head, ft_list_new("bbbb"));
 	print_list(head);
 	printf("Size of the list: %d\n", ft_list_size(head));
 	free_list(head);

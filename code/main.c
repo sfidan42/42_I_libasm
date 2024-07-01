@@ -1,4 +1,5 @@
 #include <libasm.h>
+#include <stdio.h>
 
 extern void free(void *ptr);
 

@@ -152,4 +152,14 @@ I noticed that when compiled with gcc (gcc main.c + libasm.a, libasm.a was compi
     \label{fig:reg_malloc}
 \end{figure}
 
+\subsection{leave instruction}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{leave.png}
+    \caption{Leave instruction reverses this}
+    \label{fig:leave}
+\end{figure}
+
+I used the leave instruction in the end of the function to reverse the stored up memory. The stored up memory is allocated for the local variables in the function as seen in the figure \ref{fig:leave}.
+
 \end{document}

@@ -11,23 +11,28 @@ iter:
 	mov [rbp - 0x18], rdi		;	int arr
 	mov [rbp - 0x20], rsi		;	int (*f)()
 	mov dword [rbp - 0x8], 0x0	;	int i = 0;
-loop:
-	cmp dword [rbp - 0x8], 0x5	;	while (i < 5)
+l1:
+	cmp dword [rbp - 0x8], 0x4	;	while (i < 5)
 	jge end						;	{
+
 	mov rax, [rbp - 0x8]
-	lea rdx, [rax * 4]
+	lea rsi, [rax * 0x4 + 0x4]
 	mov rax, [rbp - 0x18]
-	lea rcx, [rax + rdx]		;		rcx = arr[i];
+	add rsi, rax				;		rsi = arr[i];
+
 	mov rax, [rbp - 0x8]
-	lea rdx, [rax * 4]
+	lea rdi, [rax * 0x4]
 	mov rax, [rbp - 0x18]
-	add rdx, rax				;		rdx = arr[i];
-	mov rax, [rbp - 0x20]		;		rax = f;
-	mov rsi, rcx				;		rsi = rcx;
-	mov rdi, rdx				;		rdi = rdx;
-	call rax					;		f();
+	add rdi, rax				;		rsi = arr[i];
+
+	call [rbp - 0x20]			;		f();
+	cmp rax, 0x0				;		if (f() > 0)
+	jle fi						;		{
+	
+fi:								;		}
+
 	inc dword [rbp - 0x8]		;		i++;
-	jmp loop					;	}
+	jmp l1						;	}
 end:
 	leave
 	ret

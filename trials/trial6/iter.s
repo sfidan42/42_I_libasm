@@ -13,19 +13,19 @@ iter:
 	mov dword [rbp - 0x8], 0x0	;	int i = 0;
 loop:
 	cmp dword [rbp - 0x8], 0x5	;	while (i < 5)
-	jge end						;	{
+	jge end					;	{
+
 	mov rax, [rbp - 0x8]
-	lea rdx, [rax * 4]
+	lea rsi, [rax * 4]
 	mov rax, [rbp - 0x18]
-	lea rcx, [rax + rdx]		;		rcx = arr[i];
+	add rsi, rax				;		rsi = arr[i];
+
 	mov rax, [rbp - 0x8]
-	lea rdx, [rax * 4]
+	lea rdi, [rax * 4]
 	mov rax, [rbp - 0x18]
-	add rdx, rax				;		rdx = arr[i];
-	mov rax, [rbp - 0x20]		;		rax = f;
-	mov rsi, rcx				;		rsi = rcx;
-	mov rdi, rdx				;		rdi = rdx;
-	call rax					;		f();
+	add rdi, rax				;		rsi = arr[i];
+
+	call [rbp - 0x20]			;		f();
 	inc dword [rbp - 0x8]		;		i++;
 	jmp loop					;	}
 end:

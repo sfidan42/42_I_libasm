@@ -8,11 +8,11 @@ iter:
 	push rbp
 	mov rbp, rsp
 	sub rsp, 0x20
-	mov [rbp - 0x18], rdi		;	int arr
-	mov [rbp - 0x20], rsi		;	int (*f)()
-	mov dword [rbp - 0x8], 0x0	;	int i = 0;
+	mov [rbp - 0x18], rdi		;	int arr[5]
+	mov [rbp - 0x10], rsi		;	int (*f)()
+	mov qword [rbp - 0x8], 0x0	;	size_t i = 0;
 l1:
-	cmp dword [rbp - 0x8], 0x4	;	while (i < 5)
+	cmp qword [rbp - 0x8], 0x4	;	while (i < 4)
 	jge end						;	{
 
 	mov rax, [rbp - 0x8]
@@ -23,15 +23,15 @@ l1:
 	mov rax, [rbp - 0x8]
 	lea rdi, [rax * 0x4]
 	mov rax, [rbp - 0x18]
-	add rdi, rax				;		rsi = arr[i];
+	add rdi, rax				;		rdi = arr[i];
 
-	call [rbp - 0x20]			;		f();
-	cmp rax, 0x0				;		if (f() > 0)
+	call [rbp - 0x10]			;		rax = f();
+	cmp rax, 0x0				;		if (rax > 0)
 	jle fi						;		{
 	
 fi:								;		}
 
-	inc dword [rbp - 0x8]		;		i++;
+	inc qword [rbp - 0x8]		;		i++;
 	jmp l1						;	}
 end:
 	leave

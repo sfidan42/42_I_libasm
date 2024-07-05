@@ -15,9 +15,7 @@ extern void	ft_list_sort(t_list **begin_list, int (*cmp)());
 //	ptr = *begin_list;
 //	
 //	cmp(ptr->data, ptr->next->data);
-//	ptr = ptr->next;
-//	cmp(ptr->data, ptr->next->data);
-//	ptr = ptr->next;
+//	//ptr = ptr->next;
 //	(void)cmp;
 //}
 //{

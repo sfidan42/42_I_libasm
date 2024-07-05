@@ -1,6 +1,3 @@
-section .data
-	str 
-
 section .text
 	global ft_list_sort
 
@@ -12,17 +9,19 @@ ft_list_sort:
 	mov rbp, rsp
 	sub rsp, 0x8
 	
-	mov rax, [rdi]
-	mov [rbp - 0x8], rax
+	mov rax, [rdi]			;	rax = *begin_list
+	mov [rbp - 0x8], rax	;	ptr = rax
 
-l1:
-	cmp rax, 0
-	je e1
+l1:							;	while (1) {
+	cmp qword [rbp - 0x8], 0			;	if (ptr == 0)
+	je e1						;		break ;
 
 
 
-	mov rax, [rax + 0x8]
-	jmp l1
+	mov rax, [rbp - 0x8]		;	rax = ptr
+	mov rax, [rax + 0x8]		;	rax = rax->next
+	mov [rbp - 0x8], rax		;	ptr = rax
+	jmp l1					;	}
 e1:
 
 	leave

@@ -62,6 +62,18 @@ t_list	*list_new(void *data)
 	return (node);
 }
 
+void ft_list_print(t_list *lst)
+{
+	t_list	*ptr;
+
+	ptr = lst;
+	while (ptr)
+	{
+		printf("%s\n", (char *)ptr->data);
+		ptr = ptr->next;
+	}
+}
+
 int main(void)
 {
 	t_list	*lst;
@@ -74,6 +86,10 @@ int main(void)
 	for (t_list *ptr = lst; ptr; ptr = ptr->next)
 		fprintf(fp, "node address; data: %p, next:%p\n", &(ptr->data), &(ptr->next));
 	fclose(fp);
+	printf("before\n");
+	ft_list_print(lst);
 	ft_list_sort(&lst, comp);
+	printf("sorted\n");
+	ft_list_print(lst);
 	return (0);
 }

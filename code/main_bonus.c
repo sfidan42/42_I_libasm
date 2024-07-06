@@ -52,30 +52,27 @@ int	contains(void *elem, void *ref)
 	return (0);
 }
 
-void ft_list_remove_if(t_list **alst, void *data_ref, int (*cmp)())
+void	ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)())
 {
-	t_list *current;
-	t_list *temp;
+	t_list	*remove;
+	t_list	*current;
 
-	while (*alst && cmp((*alst)->data, data_ref) == 0)
-	{
-		temp = *alst;
-		*alst = (*alst)->next;
-		free(temp);
-	}
-	current = *alst;
+	current = *begin_list;
 	while (current && current->next)
 	{
-		if (cmp(current->next->data, data_ref) == 0)
+		if ((*cmp)(current->next->data, data_ref) == 0)
 		{
-			temp = current->next;
+			remove = current->next;
 			current->next = current->next->next;
-			free(temp);
+			free(remove);
 		}
-		else
-		{
-			current = current->next;
-		}
+		current = current->next;
+	}
+	current = *begin_list;
+	if (current && (*cmp)(current->data, data_ref) == 0)
+	{
+		*begin_list = current->next;
+		free(current);
 	}
 }
 

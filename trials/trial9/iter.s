@@ -13,7 +13,6 @@ ft_list_sort:
 	mov [rbp - 0x10], rsi		;	backup cmp
 
 	mov [rbp - 0x8], rax		;	ptr2 = rax
-
 l2:
 	mov rax, [rbp - 0x8]		;	rax = ptr2
 	mov rax, [rax + 0x8]		;	rax = ptr2->next
@@ -31,7 +30,13 @@ l2:
 
 	cmp eax, 0x0				;		if (cmp(ptr2->data, ptr2->next->data) > 0)
 	jle fi						;		{
-	
+	mov rax, [rbp - 0x8]		;			rax = ptr2
+	mov rdi, [rax]				;			rdi = ptr2->data // next
+	mov rbx, [rbp - 0x8]		;			rbx = ptr2
+	mov rbx, [rbx + 0x8]		;			rbx = ptr2->next
+	mov rsi, [rbx]				;			rsi = ptr2->next->data
+	mov [rax], rsi				;			ptr2->data = ptr2->next->data
+	mov [rbx], rdi				;			ptr2->next->data = next
 fi								;		}
 
 	mov rax, [rbp - 0x8]		;		rax = ptr2

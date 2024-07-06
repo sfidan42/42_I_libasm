@@ -53,6 +53,8 @@ int	main(void)
 	ft_list_push_front(&head, ft_list_new("bbbb"));
 	print_list(head);
 	printf("Size of the list: %d\n", ft_list_size(head));
+	ft_list_sort(&head, (void *)&ft_strcmp);
+	print_list(head);
 	free_list(head);
 	return (0);
 }

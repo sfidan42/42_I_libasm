@@ -58,7 +58,29 @@ int	contains(void *elem, void *ref)
 	return (0);
 }
 
-extern void	ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)());
+void	ft_list_sort(t_list **alst, int (*cmp)(void *, void *))
+{
+	t_list	*list;
+	t_list	*aux;
+	void	*data;
+
+	list = *alst;
+	while (list)
+	{
+		aux = list->next;
+		while (aux)
+		{
+			if (cmp(list->data, aux->data) > 0)
+			{
+				data = list->data;
+				list->data = aux->data;
+				aux->data = data;
+			}
+			aux = aux->next;
+		}
+		list = list->next;
+	}
+}
 
 int	main(void)
 {

@@ -24,14 +24,7 @@ loop:						;	while (true) {
 
 	mov rdi, [rdi]			;		rdi = node->next->data
 	mov rsi, [rbp - 0x10]	;		rsi = data_ref
-	call [rbp - 0x18]		;		rax = cmp(node->data, data_ref)
-	cmp rax, 0x0			;		if (rax == 0)
-	jne fi					;		{
-	mov rdi, [rbp - 0x20]	;			rdi = node
-	mov rsi, [rdi + 0x8]	;			rsi = node->next
-	mov rsi, [rsi + 0x8]	;			rsi = node->next->next
-	mov [rdi + 0x8], rsi	;			node->next = node->next->next
-fi:							;		}
+	call [rbp - 0x18]		;		rax = cmp(node->next->data, data_ref)
 
 	mov rax, [rbp - 0x20]	;		rax = node
 	mov rax, [rax + 0x8]	;		rax = node->next

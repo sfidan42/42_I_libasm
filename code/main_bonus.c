@@ -82,11 +82,29 @@ void	ft_list_sort(t_list **alst, int (*cmp)(void *, void *))
 	}
 }
 
+int		ft_atoi_base(const char *str, const char *base)
+{
+	int	n;
+	int	res;
+	int	len;
+
+	res = 0;
+	len = ft_strlen(base);
+	n = strchr(base, str[2]) - base;
+	res += 1 * n;
+	n = strchr(base, str[1]) - base;
+	res += len * n;
+	n = strchr(base, str[0]) - base;
+	res += len * len * n;
+	return (res);
+}
+
 int	main(void)
 {
 	t_list	*head;
 	char	c;
 
+	printf("123_16 = %d\n", ft_atoi_base("123", "0123456789abcdef"));
 	head = NULL;
 	ft_list_push_front(&head, ft_list_new("a1"));
 	ft_list_push_front(&head, ft_list_new("a2"));

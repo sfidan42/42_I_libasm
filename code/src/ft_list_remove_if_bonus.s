@@ -1,88 +1,43 @@
-section .data
-;global ft_list_remove_if
-extern free
+section .text
+	global ft_list_remove_if
+	extern free
 
 ft_list_remove_if:
-	; Input:
-	;	rdi = t_list **alst
-	;	rsi = void *ref
-	;	rdx = int (*cmp)()
-	; Local:
-	;	rbx = t_list *current
-	;	rcx = t_list *temp
-	push rdi
-	push rsi
-	push rbx
-	push rcx
-l1:
-	cmp qword [rdi], 0
-	je e1
-	mov rdi, [rdi]
-	mov rdi, [rdi + 0]
-	;mov rsi, rsi
-	call rdx
-	cmp rax, 0
-	jne e1
-	mov rcx, [rdi]
-	mov rax, [rdi + 8]
-	mov [rdi], rax
-	push rdi
-	mov rdi, rcx
-	call free
-	pop rdi
-e1:
-	mov rbx, [rdi]
-l2:
-	cmp rbx, 0
-	je e2
-	mov rax, [rbx + 8]
-	mov rax, [rax]
-	call rdx
-	cmp rax, 0
-	jne e2
-	mov rcx, [rbx + 8]
-	mov rax, [rcx + 8]
-	mov [rbx + 8], rax
-	push rbx
-	mov rbx, rcx
-	call free
-	pop rbx
-	jmp l2
-e2:
-	pop rcx
-	pop rbx
-	pop rsi
-	pop rdi
+	; Inputs:
+	;	rdi: t_list	**begin_list
+	;	rsi: void *data_ref
+	;	rdx: int (*cmp)()
+	push rbp
+	mov rbp, rsp
+	sub rsp, 0x30
+	mov [rbp - 0x8], rdi	;	begin_list
+	mov [rbp - 0x10], rsi	;	data_ref
+	mov [rbp - 0x18], rdx	;	cmp()
+	mov rdi, [rdi]			;	rdi = *begin_list
+	mov [rbp - 0x20], rdi	;	node = *begin_list
+
+loop:						;	while (true) {
+	mov rdi, [rbp - 0x20]	;		rdi = node
+	mov rdi, [rdi + 0x8]	;		rdi = node->next
+	cmp rdi, 0x0			;		if (!node->next)
+	je end					;			break ;
+
+	mov rdi, [rdi]			;		rdi = node->next->data
+	mov rsi, [rbp - 0x10]	;		rsi = data_ref
+	call [rbp - 0x18]		;		rax = cmp(node->data, data_ref)
+	cmp rax, 0x0			;		if (rax == 0)
+	jne fi					;		{
+	mov rdi, [rbp - 0x20]	;			rdi = node
+	mov rsi, [rdi + 0x8]	;			rsi = node->next
+	mov rsi, [rsi + 0x8]	;			rsi = node->next->next
+	mov [rdi + 0x8], rsi	;			node->next = node->next->next
+fi:							;		}
+
+	mov rax, [rbp - 0x20]	;		rax = node
+	mov rax, [rax + 0x8]	;		rax = node->next
+	mov [rbp - 0x20], rax	;		node = node->next
+	jmp loop				;	}
+end:
+
+	leave
 	ret
-
-
-;#include <stdlib.h>
-;#include "ft_list.h"
-;
-;void ft_list_remove_if(t_list **alst, void *data_ref, int (*cmp)())
-;{
-;	t_list *current;
-;	t_list *temp;
-;
-;	while (*alst && cmp((*alst)->data, data_ref) == 0)
-;	{
-;		temp = *alst;
-;		*alst = (*alst)->next;
-;		free(temp);
-;	}
-;	current = *alst;
-;	while (current && current->next)
-;	{
-;		if (cmp(current->next->data, data_ref) == 0)
-;		{
-;			temp = current->next;
-;			current->next = current->next->next;
-;			free(temp);
-;		}
-;		else
-;		{
-;			current = current->next;
-;		}
-;	}
-;}
-;

@@ -47,34 +47,18 @@ void	free_list(t_list *list)
 
 int	contains(void *elem, void *ref)
 {
-	if (!strchr((char *)elem, *(char *)ref))
+	char	*str;
+	char	c;
+
+	str = elem;
+	c = *(char *)ref;
+	printf("Comparing %s with %c\n", str, c);
+	if (strchr(str, c))
 		return (1);
 	return (0);
 }
 
-void	ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)())
-{
-	t_list	*remove;
-	t_list	*current;
-
-	current = *begin_list;
-	while (current && current->next)
-	{
-		if ((*cmp)(current->next->data, data_ref) == 0)
-		{
-			remove = current->next;
-			current->next = current->next->next;
-			free(remove);
-		}
-		current = current->next;
-	}
-	current = *begin_list;
-	if (current && (*cmp)(current->data, data_ref) == 0)
-	{
-		*begin_list = current->next;
-		free(current);
-	}
-}
+extern void	ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)());
 
 int	main(void)
 {
@@ -82,16 +66,23 @@ int	main(void)
 	char	c;
 
 	head = NULL;
-	ft_list_push_front(&head, ft_list_new("aaaa"));
-	ft_list_push_front(&head, ft_list_new("bbbb"));
-	ft_list_push_front(&head, ft_list_new("aabb"));
-	ft_list_push_front(&head, ft_list_new("cccc"));
+	ft_list_push_front(&head, ft_list_new("a1"));
+	ft_list_push_front(&head, ft_list_new("a2"));
+	ft_list_push_front(&head, ft_list_new("b1"));
+	ft_list_push_front(&head, ft_list_new("b2"));
+	ft_list_push_front(&head, ft_list_new("c1"));
+	ft_list_push_front(&head, ft_list_new("c2"));
+	ft_list_push_front(&head, ft_list_new("d1"));
+	ft_list_push_front(&head, ft_list_new("d2"));
 	print_list(head);
 	printf("Size of the list: %d\n", ft_list_size(head));
 	ft_list_sort(&head, (void *)&ft_strcmp);
+	printf("Sorted list:\n");
 	print_list(head);
 	c = 'a';
+	printf("Removing elements containing %c\n", c);
 	ft_list_remove_if(&head, &c, (void *)&contains);
+	printf("Operation done\n");
 	print_list(head);
 	free_list(head);
 	return (0);

@@ -5,22 +5,18 @@ extern __errno_location
 ft_write:
 	; Input:
 	; edi - (int fd)
-	; rax - (void *buf)
+	; rsi - (void *buf)
 	; rdx - (size_t count)
-	;mov edi, edi	;	int fd
-	;mov rsi, rax	;	const void *buf
-	;mov rdx, rdx	;	size_t count
-	mov eax, 1		;	write system call number
+	mov rax, 0x1	;	write system call number
 	syscall
-	cmp rax, 0x0
-	jl err_ret
-	ret
+	cmp rax, 0x0	;	if (rax < 0)
+	jl err_ret		;		goto err_ret
+	ret				;	return (rax);
 
 err_ret:
 	neg	rax
 	mov rdx, rax
 	call __errno_location
-	mov [rax], rdx
-	mov rax, -1
+	mov [rax], rdx			;	*__errno_location() = -rax
+	mov rax, -1				;	return (-1);
 	ret
-

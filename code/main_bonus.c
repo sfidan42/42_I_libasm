@@ -27,7 +27,10 @@ void	print_list(t_list *list)
 	while (list)
 	{
 		print(" -- ");
-		print(list->data);
+		if (list->data == 0)
+			print("NULL");
+		else
+			print(list->data);
 		print("\n");
 		list = list->next;
 	}
@@ -53,33 +56,9 @@ int	contains(void *elem, void *ref)
 	str = elem;
 	c = *(char *)ref;
 	printf("Comparing %s with %c\n", str, c);
-	if (strchr(str, c))
+	if (!strchr(str, c))
 		return (1);
 	return (0);
-}
-
-void	ft_list_sort(t_list **alst, int (*cmp)(void *, void *))
-{
-	t_list	*list;
-	t_list	*aux;
-	void	*data;
-
-	list = *alst;
-	while (list)
-	{
-		aux = list->next;
-		while (aux)
-		{
-			if (cmp(list->data, aux->data) > 0)
-			{
-				data = list->data;
-				list->data = aux->data;
-				aux->data = data;
-			}
-			aux = aux->next;
-		}
-		list = list->next;
-	}
 }
 
 int		ft_atoi_base(const char *str, const char *base)
@@ -87,15 +66,21 @@ int		ft_atoi_base(const char *str, const char *base)
 	int	n;
 	int	res;
 	int	len;
+	int	i;
 
 	res = 0;
 	len = ft_strlen(base);
-	n = strchr(base, str[2]) - base;
+	i = len - 1;
+	
+	n = strchr(base, str[i--]) - base;
 	res += 1 * n;
-	n = strchr(base, str[1]) - base;
+	
+	n = strchr(base, str[i--]) - base;
 	res += len * n;
-	n = strchr(base, str[0]) - base;
+	
+	n = strchr(base, str[i--]) - base;
 	res += len * len * n;
+	
 	return (res);
 }
 
@@ -104,24 +89,25 @@ int	main(void)
 	t_list	*head;
 	char	c;
 
+	c = 'a';
 	printf("123_16 = %d\n", ft_atoi_base("123", "0123456789abcdef"));
 	head = NULL;
-	ft_list_push_front(&head, ft_list_new("a1"));
-	ft_list_push_front(&head, ft_list_new("a2"));
-	ft_list_push_front(&head, ft_list_new("b1"));
-	ft_list_push_front(&head, ft_list_new("b2"));
-	ft_list_push_front(&head, ft_list_new("c1"));
-	ft_list_push_front(&head, ft_list_new("c2"));
-	ft_list_push_front(&head, ft_list_new("d1"));
-	ft_list_push_front(&head, ft_list_new("d2"));
+	ft_list_remove_if(&head, &c, (void *)&contains, free);
+	ft_list_push_front(&head, ft_list_new("ab1"));
+	ft_list_push_front(&head, ft_list_new("aa2"));
+	ft_list_push_front(&head, ft_list_new("ba1"));
+	ft_list_push_front(&head, ft_list_new("bd2"));
+	ft_list_push_front(&head, ft_list_new("cs1"));
+	ft_list_push_front(&head, ft_list_new("cr2"));
+	ft_list_push_front(&head, ft_list_new("da1"));
+	ft_list_push_front(&head, ft_list_new("db2"));
 	print_list(head);
 	printf("Size of the list: %d\n", ft_list_size(head));
 	ft_list_sort(&head, (void *)&ft_strcmp);
 	printf("Sorted list:\n");
 	print_list(head);
-	c = 'a';
 	printf("Removing elements containing %c\n", c);
-	ft_list_remove_if(&head, &c, (void *)&contains);
+	ft_list_remove_if(&head, &c, (void *)&contains, free);
 	printf("Operation done\n");
 	print_list(head);
 	free_list(head);

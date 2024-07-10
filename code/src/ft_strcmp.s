@@ -5,6 +5,8 @@ ft_strcmp:
 	; Inputs:
 	;	rdi: const char *s1
 	;	rsi: const char *s2
+	mov rax, 0		;	rax = 0
+	mov rdx, 0		;	rdx = 0
 loop:				;	while (true) {
 	mov al, [rdi]	;		al = *s1
 	mov dl, [rsi]	;		dl = *s2

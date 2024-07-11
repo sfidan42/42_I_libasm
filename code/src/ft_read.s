@@ -1,22 +1,21 @@
 section .text
-global ft_read
-extern __errno_location
+global _ft_read
+extern ___error
 
-ft_read:
+_ft_read:
 	; Input:
 	; edi - (int fd)
 	; rsi - (void *buf)
 	; rdx - (size_t count)
-	mov rax, 0x0	;	read system call number
+	mov		rax, 0x02000003	; read system call number
 	syscall
-	cmp rax, 0x0	;	if (rax < 0)
-	jl err_ret		;		goto err_ret
-	ret				;	return (rax);
+	jc		err_ret			; jump if carry flag is set
+	ret
 
 err_ret:
-	neg	rax
-	mov rdx, rax
-	call __errno_location
-	mov [rax], rdx			;	*__errno_location() = -rax
-	mov rax, -1				;	return (-1);
+	push	rax
+	call	___error
+	pop		rdx			;	rdx = old rax
+	mov		[rax], rdx	;	*___error() = old rax
+	mov		rax, -1		;	return (-1);
 	ret

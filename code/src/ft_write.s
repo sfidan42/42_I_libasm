@@ -1,22 +1,22 @@
 section .text
-global ft_write
-extern __errno_location
+global _ft_write
+extern _foo
+extern ___error
 
-ft_write:
+_ft_write:
 	; Input:
 	; edi - (int fd)
 	; rsi - (void *buf)
 	; rdx - (size_t count)
-	mov rax, 0x1	;	write system call number
+	mov		rax, 0x02000004	; write system call number
 	syscall
-	cmp rax, 0x0	;	if (rax < 0)
-	jl err_ret		;		goto err_ret
-	ret				;	return (rax);
+	jc		err_ret			; jump if carry flag is set
+	ret
 
 err_ret:
-	neg	rax
-	mov rdx, rax
-	call __errno_location
-	mov [rax], rdx			;	*__errno_location() = -rax
-	mov rax, -1				;	return (-1);
+	push	rax
+	call	___error
+	pop		rdx			;	rdx = old rax
+	mov		[rax], rdx	;	*___error() = old rax
+	mov		rax, -1		;	return (-1);
 	ret

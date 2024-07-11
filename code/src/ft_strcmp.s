@@ -1,7 +1,7 @@
 section .text
-global ft_strcmp
+global _ft_strcmp
 
-ft_strcmp:
+_ft_strcmp:
 	; Inputs:
 	;	rdi: const char *s1
 	;	rsi: const char *s2

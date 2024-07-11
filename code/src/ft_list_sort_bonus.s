@@ -1,7 +1,7 @@
 section .text
-	global ft_list_sort
+	global _ft_list_sort
 
-ft_list_sort:
+_ft_list_sort:
 	; Inputs:
 	;	rdi: t_list	**begin_list
 	;	rsi: int (*cmp)()

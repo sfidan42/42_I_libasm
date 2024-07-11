@@ -1,8 +1,8 @@
 section .text
-	global ft_list_remove_if
+	global _ft_list_remove_if
 	extern free
 
-ft_list_remove_if:
+_ft_list_remove_if:
 	; Inputs:
 	;	rdi: t_list	**begin_list
 	;	rsi: void *data_ref

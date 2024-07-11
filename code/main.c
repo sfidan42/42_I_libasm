@@ -1,11 +1,11 @@
-#include <libasm.h>
+#include "./inc/libasm.h"
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
-extern void free(void *ptr);
-
-void	print(const char *str)
+void	print(const char *s)
 {
-	ft_write(1, str, ft_strlen(str));
+	ft_write(1, s, ft_strlen(s));
 }
 
 void	scan(char *buffer, size_t size)

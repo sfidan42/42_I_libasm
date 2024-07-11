@@ -1,8 +1,8 @@
 section .text
-global ft_atoi_base
-extern strlen
-extern isspace
-extern strchr
+global _ft_atoi_base
+extern _ft_strlen
+extern _isspace
+extern _strchr
 
 ret0:
 	mov rax, 0x0
@@ -16,7 +16,7 @@ valid_base:
 	mov rbp, rsp
 	sub rsp, 0x10
 	mov [rbp - 0x8], rdi	;	save base
-	call strlen				;	rax = strlen(base)
+	call _ft_strlen			;	rax = strlen(base)
 	cmp rax, 0x2			;	if (rax < 2)
 	jl ret0					;		return (false);
 .l1:						;	while (1) {
@@ -25,7 +25,7 @@ valid_base:
 	je .e1					;			break ;
 	
 	mov edi, [rsi]			;		rdi = *base
-	call isspace			;		rax = isspace(*base)
+	call _isspace			;		rax = isspace(*base)
 	cmp rax, 0x0			;		if (rax)
 	je ret0					;			return (false);
 
@@ -73,7 +73,7 @@ valid_base:
 ;	return true;
 ;}
 
-ft_atoi_base:
+_ft_atoi_base:
 	; Inputs:
 	;	rdi: const char *str
 	;	rsi: const char *base
@@ -95,7 +95,7 @@ ft_atoi_base:
 	mov rdi, [rbp - 0x8]		;		rdi = str
 	mov rdi, 0x0				;		rdi = 0
 	mov dl, byte [rdi]			;		dl = *rdi
-	call isspace				;		rax = isspace(rdi)
+	call _isspace				;		rax = isspace(rdi)
 	cmp rax, 0x0				;		if (!rax)
 	je .e1						;			break ;
 	inc qword [rbp - 0x8]		;		str++;
@@ -117,7 +117,7 @@ ft_atoi_base:
 .e2:
 	mov [rbp - 0x18], rax		;	is_neg = rax
 	mov rdi, [rbp - 0x10]		;	rdi = base
-	call strlen					;	rax = strlen(base)
+	call _ft_strlen				;	rax = strlen(base)
 	mov [rbp - 0x28], rax		;	radix = rax
 .l3:							;	while (1) {
 	mov rdi, [rbp - 0x10]		;		rdi = base
@@ -125,7 +125,7 @@ ft_atoi_base:
 	mov rsi, [rsi]				;		rsi = *str
 	cmp byte [rsi], 0x0			;		if (*str == '\0')
 	je .e3						;			break ;
-	call strchr					;		rax = strchr(base, *str)
+	call _strchr				;		rax = strchr(base, *str)
 	cmp rax, 0x0				;		if (!rax)
 	je .e3						;			break ;
 

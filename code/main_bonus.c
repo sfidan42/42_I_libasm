@@ -1,5 +1,5 @@
-#include <libasm.h>
-#include <libasm_bonus.h>
+#include "./inc/libasm.h"
+#include "./inc/libasm_bonus.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>

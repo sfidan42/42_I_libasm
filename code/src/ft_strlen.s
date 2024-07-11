@@ -1,7 +1,10 @@
 section .text
-global ft_strlen
+global _ft_strlen
 
-ft_strlen:
+_ft_strlen:
+	; Input:
+	;	rdi: const char *str
+	mov rax, rdi
 loop:
 	cmp byte [rax], 0	;	while (*str)
 	je end				;	{

@@ -1,7 +1,7 @@
 section .text
-global ft_list_size
+global _ft_list_size
 
-ft_list_size:
+_ft_list_size:
 	; Input:
 	;	rdi = t_list* lst
 	; Output:

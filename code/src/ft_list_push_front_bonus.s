@@ -1,8 +1,8 @@
 section .text
-global ft_list_push_front
-extern malloc
+global _ft_list_push_front
+extern _malloc
 
-ft_list_push_front:
+_ft_list_push_front:
 	; Input:
 	; rdi - (t_list **alst)
 	; rsi - (void *data)
@@ -13,7 +13,7 @@ ft_list_push_front:
 	mov [rbp - 0x10], rsi		;	data
 
 	mov rdi, 0x10				;	rdi = 16
-	call malloc					;	rax = malloc(16)
+	call _malloc				;	rax = malloc(16)
 	mov rsi, [rbp - 0x10]		;	rsi = data
 	mov [rax], rsi				;	rsi->data = data
 	mov qword [rax + 0x8], 0x0	;	rsi->next = NULL

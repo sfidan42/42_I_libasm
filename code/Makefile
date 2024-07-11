@@ -15,8 +15,8 @@ BSRC	=	${SRC} \
 OBJ		=	$(addprefix bin/, ${SRC:.s=.o})
 BOBJ	=	$(addprefix bin/, ${BSRC:.s=.o})
 NAME	=	libasm.a
-ASM		=	nasm -f elf64 # -f macho64
-CC		=	gcc -Wall -Wextra -Werror -m64 -g -Iinc
+ASM		=	../nasm/nasm -fmacho64 # -f elf64
+CC		=	gcc -Wall -Wextra -Werror
 
 ${NAME}: all
 
@@ -28,11 +28,11 @@ bin:
 
 all: ${OBJ}
 	ar rcs ${NAME} ${OBJ}
-	${CC} main.c -L. -lasm -o run -static
+	${CC} -Iinc main.c -L. -lasm -o run
 
 bonus: ${BOBJ}
 	ar rcs ${NAME} ${BOBJ}
-	${CC} main_bonus.c -L. -lasm -o brun -static
+	${CC} -Iinc main_bonus.c -L. -lasm -o brun
 
 clean:
 	rm -f ./run ./brun

@@ -3,6 +3,36 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <stdbool.h>
+#include <ctype.h>
+
+bool valid_base(char *base);
+
+int ref_ft_atoi_base(char *str, char *base)
+{
+	long int nb;
+	int radix;
+	bool is_negative;
+
+	if (!valid_base(base))
+		return (0);
+	while (isspace(*str))
+		str++;
+	is_negative = false;
+	while (*str == '+' || *str == '-')
+		if (*str++ == '-')
+			is_negative = !is_negative;
+	radix = strlen(base);
+	nb = 0;
+	while (*str && strchr(base, *str) != NULL)
+	{
+		nb *= radix;
+		nb += strchr(base, *str) - base;
+		str++;
+	}
+	return is_negative ? -nb : nb;
+}
+
 
 void	print(const char *s)
 {
@@ -58,8 +88,8 @@ int	main(void)
 	t_list	*head;
 	char	c;
 
-	c = 'a';
-	printf("123_16 = %d\n", ft_atoi_base("123", "0123456789abcdef"));
+	printf("norm; -123_10 = %d\n", ft_atoi_base("-123", "0123456789"));
+	printf("ref; -123_10 = %d\n", ref_ft_atoi_base("-123", "0123456789"));
 	head = NULL;
 	ft_list_remove_if(&head, &c, (void *)&contains, free);
 	ft_list_push_front(&head, "ab1");
@@ -76,6 +106,7 @@ int	main(void)
 	printf("Sorted list:\n");
 	print_list(head);
 	printf("Removing elements containing %c\n", c);
+	c = 'a';
 	ft_list_remove_if(&head, &c, (void *)&contains, free);
 	printf("Operation done\n");
 	print_list(head);

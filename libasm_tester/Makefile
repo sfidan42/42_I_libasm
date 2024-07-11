@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: cacharle <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: sfidan42 <sfidan@student.42istanbul.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/08 03:06:59 by cacharle          #+#    #+#              #
-#    Updated: 2020/11/07 17:19:11 by charles          ###   ########.fr        #
+#    Updated: 2024/07/11 19:43:30 by sfidan42         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ PYTHON = python3
 
 CC = gcc
 CCFLAGS = -I. -Wall -Wextra -Wno-nonnull
-LDFLAGS = -L$(LIBASM_PATH) -lasm -static
+LDFLAGS = -L$(LIBASM_PATH) -lasm
 
 NAME = runtest
 SRC = main.c \

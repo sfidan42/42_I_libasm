@@ -1,16 +1,15 @@
 section .text
-	;global _ft_atoi_base
+	global _ft_atoi_base
 	extern _ft_strlen
 	extern _isspace
 	extern _strchr
-	global _valid_base
 
 ret0:
 	mov rax, 0x0
 	leave
 	ret
 
-_valid_base:
+valid_base:
 	; Inputs:
 	;	rdi: char *base
 	push rbp
@@ -88,7 +87,7 @@ _ft_atoi_base:
 	mov qword [rbp - 0x28], 0x0	;	radix = 0
 
 	mov rdi, rsi				;	rdi = base
-	call _valid_base			;	rax = valid_base(base)
+	call valid_base			;	rax = valid_base(base)
 	cmp rax, 0x0				;	if (!rax)
 	je ret0						;		return (0);
 

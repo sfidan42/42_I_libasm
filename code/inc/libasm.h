@@ -1,5 +1,6 @@
 #ifndef LIBASM_H
 # define LIBASM_H
+
 typedef unsigned long size_t;
 typedef long ssize_t;
 

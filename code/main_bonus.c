@@ -9,18 +9,6 @@ void	print(const char *s)
 	ft_write(1, s, ft_strlen(s));
 }
 
-t_list	*ft_list_new(void *data)
-{
-	t_list	*new;
-
-	new = (t_list *)malloc(sizeof(t_list));
-	if (!new)
-		return (0);
-	new->data = data;
-	new->next = 0;
-	return (new);
-}
-
 void	print_list(t_list *list)
 {
 	print("List content:\n");
@@ -55,33 +43,14 @@ int	contains(void *elem, void *ref)
 
 	str = elem;
 	c = *(char *)ref;
-	printf("Comparing %s with %c\n", str, c);
+	printf("Compare %s with %c, ", str, c);
 	if (!strchr(str, c))
+	{
+		printf("keep %s\n", str);
 		return (1);
+	}
+	printf("remove %s\n", str);
 	return (0);
-}
-
-int		ft_atoi_base(const char *str, const char *base)
-{
-	int	n;
-	int	res;
-	int	len;
-	int	i;
-
-	res = 0;
-	len = ft_strlen(base);
-	i = len - 1;
-	
-	n = strchr(base, str[i--]) - base;
-	res += 1 * n;
-	
-	n = strchr(base, str[i--]) - base;
-	res += len * n;
-	
-	n = strchr(base, str[i--]) - base;
-	res += len * len * n;
-	
-	return (res);
 }
 
 int	main(void)
@@ -90,17 +59,17 @@ int	main(void)
 	char	c;
 
 	c = 'a';
-	printf("123_16 = %d\n", ft_atoi_base("123", "0123456789abcdef"));
+	//printf("123_16 = %d\n", ft_atoi_base("123", "0123456789abcdef"));
 	head = NULL;
 	ft_list_remove_if(&head, &c, (void *)&contains, free);
-	ft_list_push_front(&head, ft_list_new("ab1"));
-	ft_list_push_front(&head, ft_list_new("aa2"));
-	ft_list_push_front(&head, ft_list_new("ba1"));
-	ft_list_push_front(&head, ft_list_new("bd2"));
-	ft_list_push_front(&head, ft_list_new("cs1"));
-	ft_list_push_front(&head, ft_list_new("cr2"));
-	ft_list_push_front(&head, ft_list_new("da1"));
-	ft_list_push_front(&head, ft_list_new("db2"));
+	ft_list_push_front(&head, "ab1");
+	ft_list_push_front(&head, "aa2");
+	ft_list_push_front(&head, "ba1");
+	ft_list_push_front(&head, "bd2");
+	ft_list_push_front(&head, "cs1");
+	ft_list_push_front(&head, "cr2");
+	ft_list_push_front(&head, "da1");
+	ft_list_push_front(&head, "db2");
 	print_list(head);
 	printf("Size of the list: %d\n", ft_list_size(head));
 	ft_list_sort(&head, (void *)&ft_strcmp);

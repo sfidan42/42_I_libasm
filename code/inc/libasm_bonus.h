@@ -7,7 +7,7 @@ typedef struct s_list
 	struct s_list	*next;
 }					t_list;
 
-int		ft_atoi_base(const char *str, const char *base);
+//int		ft_atoi_base(const char *str, const char *base);
 void	ft_list_push_front(t_list **alst, void *data);
 int		ft_list_size(t_list *lst);
 void	ft_list_sort(t_list **alst, int (*cmp)(void *, void *));

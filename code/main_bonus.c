@@ -1,8 +1,36 @@
-#include "./inc/libasm.h"
-#include "./inc/libasm_bonus.h"
+#include <libasm.h>
+#include <libasm_bonus.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <ctype.h>
+
+extern int	valid_base(char *base);
+
+int ft_atoi_base(char *str, char *base)
+{
+	long int nb;
+	int radix;
+	int is_negative;
+;
+	if (!valid_base(base))
+		return 0;
+	while (isspace(*str))
+		str++;
+	is_negative = 0;
+	while (*str == '+' || *str == '-')
+		if (*str++ == '-')
+			is_negative = !is_negative;
+	radix = strlen(base);
+	nb = 0;
+	while (*str && strchr(base, *str) != NULL)
+	{
+		nb *= radix;
+		nb += strchr(base, *str) - base;
+		str++;
+	}
+	return is_negative ? -nb : nb;
+}
 
 void	print(const char *s)
 {

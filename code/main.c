@@ -1,4 +1,4 @@
-#include "./inc/libasm.h"
+#include <libasm.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

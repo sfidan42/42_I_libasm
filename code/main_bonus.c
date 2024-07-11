@@ -59,7 +59,7 @@ int	main(void)
 	char	c;
 
 	c = 'a';
-	//printf("123_16 = %d\n", ft_atoi_base("123", "0123456789abcdef"));
+	printf("123_16 = %d\n", ft_atoi_base("123", "0123456789abcdef"));
 	head = NULL;
 	ft_list_remove_if(&head, &c, (void *)&contains, free);
 	ft_list_push_front(&head, "ab1");

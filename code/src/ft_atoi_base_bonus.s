@@ -14,7 +14,7 @@ valid_base:
 	;	rdi: char *base
 	push rbp
 	mov rbp, rsp
-	sub rsp, 0x8
+	sub rsp, 0x10
 	mov [rbp - 0x8], rdi	;	save base
 	call strlen				;	rax = strlen(base)
 	cmp rax, 0x2			;	if (rax < 2)
@@ -24,7 +24,7 @@ valid_base:
 	cmp byte [rsi], 0x0		;		if (*base == '\0')
 	je .e1					;			break ;
 	
-	mov rdi, [rsi]			;		rdi = *base
+	mov edi, [rsi]			;		rdi = *base
 	call isspace			;		rax = isspace(*base)
 	cmp rax, 0x0			;		if (rax)
 	je ret0					;			return (false);

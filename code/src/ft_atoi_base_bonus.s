@@ -40,7 +40,6 @@ _valid_base:
 	je ret0					;			return (false);
 	cmp byte [rsi], 0x2d	;		if (*base == '-')
 	je ret0					;			return (false);
-
 	inc rsi
 	mov [rbp - 0x8], rsi	;		base++;
 	jmp .l1					;	}
@@ -129,25 +128,14 @@ _ft_atoi_base:
 	mov rsi, [rbp - 0x8]		;		rsi = str
 	cmp byte [rsi], 0x0			;		if (*str == '\0')
 	je .e3						;			break ;
-;	call _strchr				;		rax = strchr(base, *str)
-;	cmp rax, 0x0				;		if (!rax)
-;	je .e3						;			break ;
-;
-;	mov rdx, [rbp - 0x28]		;		rdx = radix
-;	mov rbx, [rbp - 0x20]		;		rbx = nb
-;	imul rbx, rdx				;		rbx *= radix
-;	sub rax, [rbp - 0x10]		;		rax -= base
-;	add rbx, rax				;		rbx += rax
-;	mov [rbp - 0x20], rbx		;		nb = rbx
-;
+
+	
+
 	inc qword [rbp - 0x8]		;		str++;
 	jmp .l3						;	}
 .e3:
-;	mov rax, [rbp - 0x20]		;	rax = nb
-;	cmp byte [rbp - 0x18], 0x0	;	if (!is_neg)
-;	je .end						;		return (nb);
-;	neg rax						;	rax = -nb
-;.end:
+	
+
 	leave
 	ret
 

@@ -24,10 +24,15 @@ int ref_ft_atoi_base(char *str, char *base)
 			is_negative = !is_negative;
 	radix = strlen(base);
 	nb = 0;
-	while (*str && strchr(base, *str) != NULL)
+	while (1)
 	{
-		nb *= radix;
-		nb += strchr(base, *str) - base;
+		if (*str == 0)
+			break;
+						char *ptr = strchr(base, *str);
+						if (ptr == NULL)
+							break;
+						nb *= radix;
+						nb += ptr - base;
 		str++;
 	}
 	return is_negative ? -nb : nb;

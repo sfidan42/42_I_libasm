@@ -3,41 +3,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include <stdbool.h>
 #include <ctype.h>
-
-bool valid_base(char *base);
-
-int ref_ft_atoi_base(char *str, char *base)
-{
-	long int nb;
-	int radix;
-	bool is_negative;
-
-	if (!valid_base(base))
-		return (0);
-	while (isspace(*str))
-		str++;
-	is_negative = false;
-	while (*str == '+' || *str == '-')
-		if (*str++ == '-')
-			is_negative = !is_negative;
-	radix = strlen(base);
-	nb = 0;
-	while (1)
-	{
-		if (*str == 0)
-			break;
-						char *ptr = strchr(base, *str);
-						if (ptr == NULL)
-							break;
-						nb *= radix;
-						nb += ptr - base;
-		str++;
-	}
-	return is_negative ? -nb : nb;
-}
-
+#include <stdbool.h>
 
 void	print(const char *s)
 {
@@ -88,13 +55,57 @@ int	contains(void *elem, void *ref)
 	return (0);
 }
 
+char *ft_strchr(char *str, char c)
+{
+	printf("Searching for %c in %s, ", c, str);
+	while (*str)
+	{
+		if (*str == c)
+		{
+			printf("found.\n");
+			return (str);
+		}
+		str++;
+	}
+	printf("not found.\n");
+	return (0);
+}
+
+bool valid_base(char *base);
+
+int ref_ft_atoi_base(char *str, char *base)
+{
+	long int nb;
+	int radix;
+	bool is_negative;
+
+	if (!valid_base(base))
+		return 0;
+	while (isspace(*str))
+		str++;
+	is_negative = false;
+	while (*str == '+' || *str == '-')
+		if (*str++ == '-')
+			is_negative = !is_negative;
+	radix = strlen(base);
+	nb = 0;
+	while (*str && strchr(base, *str) != NULL)
+	{
+		nb *= radix;
+		nb += strchr(base, *str) - base;
+		str++;
+	}
+	return is_negative ? -nb : nb;
+}
+
 int	main(void)
 {
-	t_list	*head;
 	char	c;
+	t_list	*head;
 
-	printf("norm; -123_10 = %d\n", ft_atoi_base("-123", "0123456789"));
-	printf("ref; -123_10 = %d\n", ref_ft_atoi_base("-123", "0123456789"));
+	//printf("norm; \"\t\n\r\v\f\r 47\" \"01234\" = %d\n", ft_atoi_base("\t\n\r\v\f\r 442", "01234"));
+	//printf("ref; \"\t\n\r\v\f\r 47\" \"01234\" = %d\n", ref_ft_atoi_base("\t\n\r\v\f\r 442", "01234"));
+	printf("ref; \"10\" \"011\" = %d\n", ref_ft_atoi_base("10", "011"));
 	head = NULL;
 	ft_list_remove_if(&head, &c, (void *)&contains, free);
 	ft_list_push_front(&head, "ab1");

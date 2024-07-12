@@ -6,11 +6,11 @@
 #    By: sfidan42 <sfidan@student.42istanbul.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/08 03:06:59 by cacharle          #+#    #+#              #
-#    Updated: 2024/07/11 19:43:30 by sfidan42         ###   ########.fr        #
+#    Updated: 2024/07/12 13:09:53 by sfidan42         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-LIBASM_PATH = ../code
+LIBASM_PATH = ../libasm
 
 RM = rm -fv
 MAKE = make --no-print-directory

@@ -1,0 +1,21 @@
+section .text
+global _ft_strdup
+extern _ft_strlen
+extern _ft_strcpy
+extern _malloc
+extern _printf
+
+_ft_strdup:
+	; Input:
+	; rdi - (char *s1)
+	; Output:
+	; rax - (char *s2)
+	call _ft_strlen	;	rax = ft_strlen(s1)
+	push rdi		;	save s1
+	mov rdi, rax	;	rdi = rax
+	inc rdi			;	rdi++
+	call _malloc	;	rax = malloc(rdi);
+	pop rsi			;	rsi = s1
+	mov rdi, rax	;	rdi = rax
+	call _ft_strcpy	;	ft_strcpy(rax, s1); or ft_strcpy(rdi, rsi);
+	ret
